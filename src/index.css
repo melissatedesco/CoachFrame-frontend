@@ -1,0 +1,23 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* Variabili di Brand FitFrame */
+:root {
+  --ff-bg-main: #0B0E11;
+  --ff-bg-surface: #161B22;
+  --ff-primary: #00A3FF;
+  --ff-secondary: #00D27F;
+  --ff-text-main: #FFFFFF;
+  --ff-text-muted: #8B949E;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ff-bg-main);
+  color: var(--ff-text-main);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Classi Custom Utilità */
+.text-ff-primary { color: var(--ff-primary) !important; }
+.text-ff-secondary { color: var(--ff-secondary) !important; }
+.bg-ff-surface { background-color: var(--ff-bg-surface) !important; }
