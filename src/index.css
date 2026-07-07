@@ -1,23 +1,176 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
-/* Variabili di Brand FitFrame */
-:root {
-  --ff-bg-main: #0B0E11;
-  --ff-bg-surface: #161B22;
-  --ff-primary: #00A3FF;
-  --ff-secondary: #00D27F;
-  --ff-text-main: #FFFFFF;
-  --ff-text-muted: #8B949E;
+/* Palette di Brand CoachFrame — Violetto (energia/tech) + Ciano (accento luminoso) */
+:root,
+[data-bs-theme='dark'] {
+  --ff-bg-main: #08070d;
+  --ff-bg-surface: #14121f;
+  --ff-bg-surface-2: #1a1730;
+  --ff-primary: #a78bfa;
+  --ff-primary-soft: #c4b5fd;
+  --ff-secondary: #22d3ee;
+  --ff-secondary-soft: #67e8f9;
+  --ff-text-main: #f5f3fb;
+  --ff-text-muted: #948fac;
+  --ff-border: rgba(255, 255, 255, 0.08);
+  --ff-glow-1: rgba(139, 92, 246, 0.18);
+  --ff-glow-2: rgba(34, 211, 238, 0.12);
+  --ff-gradient: linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%);
+  --ff-shadow-glow: 0 8px 30px rgba(139, 92, 246, 0.2);
+  --ff-on-primary: #0b0714;
+}
+
+[data-bs-theme='light'] {
+  --ff-bg-main: #f8f7fb;
+  --ff-bg-surface: #ffffff;
+  --ff-bg-surface-2: #efecf7;
+  --ff-primary: #7c3aed;
+  --ff-primary-soft: #8b5cf6;
+  --ff-secondary: #0891b2;
+  --ff-secondary-soft: #06b6d4;
+  --ff-text-main: #1a1625;
+  --ff-text-muted: #635d78;
+  --ff-border: rgba(26, 22, 37, 0.1);
+  --ff-glow-1: rgba(124, 58, 237, 0.1);
+  --ff-glow-2: rgba(8, 145, 178, 0.08);
+  --ff-gradient: linear-gradient(135deg, #7c3aed 0%, #0891b2 100%);
+  --ff-shadow-glow: 0 8px 30px rgba(124, 58, 237, 0.14);
+  --ff-on-primary: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background-color: var(--ff-bg-main);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 0%, var(--ff-glow-1), transparent 45%),
+    radial-gradient(circle at 85% 20%, var(--ff-glow-2), transparent 40%),
+    var(--ff-bg-main);
+  background-attachment: fixed;
   color: var(--ff-text-main);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sora', 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: var(--ff-primary);
+  color: var(--ff-on-primary);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--ff-bg-surface-2); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ff-primary); }
 
 /* Classi Custom Utilità */
 .text-ff-primary { color: var(--ff-primary) !important; }
 .text-ff-secondary { color: var(--ff-secondary) !important; }
 .bg-ff-surface { background-color: var(--ff-bg-surface) !important; }
+.border-ff { border-color: var(--ff-border) !important; }
+
+.ff-gradient-text {
+  background: var(--ff-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ff-glass {
+  background: color-mix(in srgb, var(--ff-text-main) 5%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--ff-border);
+}
+
+.badge.bg-primary { background-color: var(--ff-primary) !important; }
+
+/* Bottone "ghost" neutro: usato per azioni secondarie/di rientro, coerente in entrambi i temi */
+.btn-outline-ff {
+  border: 1px solid var(--ff-border);
+  color: var(--ff-text-main);
+  background: transparent;
+}
+.btn-outline-ff:hover,
+.btn-outline-ff:focus {
+  background: color-mix(in srgb, var(--ff-text-main) 8%, transparent);
+  border-color: color-mix(in srgb, var(--ff-text-main) 28%, transparent);
+  color: var(--ff-text-main);
+}
+
+/* Card di sistema: hover lift coerente in tutta l'app */
+.card {
+  border-radius: 16px !important;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.25s ease;
+}
+.card.bg-ff-surface {
+  background-color: var(--ff-bg-surface) !important;
+  border: 1px solid var(--ff-border) !important;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ff-shadow-glow);
+  border-color: color-mix(in srgb, var(--ff-primary) 35%, transparent) !important;
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-info {
+  background: var(--ff-gradient);
+  border: none;
+  color: var(--ff-on-primary);
+}
+.btn-info:hover, .btn-info:focus {
+  filter: brightness(1.08);
+  box-shadow: var(--ff-shadow-glow);
+  color: var(--ff-on-primary);
+}
+
+.btn-outline-info {
+  border: 1px solid color-mix(in srgb, var(--ff-primary) 50%, transparent);
+  color: var(--ff-primary);
+}
+.btn-outline-info:hover {
+  background: color-mix(in srgb, var(--ff-primary) 12%, transparent);
+  border-color: var(--ff-primary);
+  color: var(--ff-primary);
+}
+
+.form-control, .form-select {
+  border-radius: 10px !important;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--ff-primary) !important;
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--ff-primary) 15%, transparent) !important;
+}
+
+.navbar {
+  background: color-mix(in srgb, var(--ff-bg-surface) 75%, transparent) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--ff-border) !important;
+}
+.navbar-nav .nav-link {
+  color: var(--ff-text-muted);
+  transition: color 0.15s ease;
+}
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active { color: var(--ff-text-main); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .btn { transition: none; }
+}

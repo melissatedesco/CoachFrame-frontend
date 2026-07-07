@@ -1,40 +1,58 @@
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
-import ExerciseCard from './components/ExerciseCard/ExerciseCard';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Landing from './pages/Landing';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import Dashboard from './pages/Dashboard';
+import Exercises from './pages/Exercises';
+import ExerciseDetail from './pages/ExerciseDetail';
+import Programs from './pages/Programs';
+import ProgramDetail from './pages/ProgramDetail';
+import Workout from './pages/Workout';
+import WorkoutSession from './pages/WorkoutSession';
+import Sessions from './pages/Sessions';
+import SessionDetail from './pages/SessionDetail';
+import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
+
+const AppLayout = () => (
+  <div className="min-vh-100">
+    <NavBar />
+    <ProtectedRoute>
+      <Outlet />
+    </ProtectedRoute>
+  </div>
+);
 
 function App() {
-  // dati esempio
-  const dummyExercises = [
-    { id: 1, title: 'Squat a Corpo Libero', muscle: 'Gambe', equip: 'Nessuno', diff: 'Principiante' },
-    { id: 2, title: 'Piegamenti sulle braccia', muscle: 'Petto/Tricipiti', equip: 'Nessuno', diff: 'Intermedio' },
-    { id: 3, title: 'Affondi con Manubri', muscle: 'Gambe', equip: 'Manubri', diff: 'Avanzato' },
-  ];
-
   return (
-    <div className='min-vh-100 bg-black text-white'>
-      <NavBar />
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/registrati" element={<Register />} />
+      <Route path="/password-dimenticata" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
-      <main className="container mt-5 ">
-        <header className='mb-4 text-center text-lg-start'>
-        <h2 className="fw-bold">I tuoi esercizi</h2>
-        <p className="text-muted">Seleziona un movimento per avviare il Coach Virtuale</p>
-        </header>
+      <Route element={<AppLayout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/esercizi" element={<Exercises />} />
+        <Route path="/esercizi/:id" element={<ExerciseDetail />} />
+        <Route path="/schede" element={<Programs />} />
+        <Route path="/schede/:id" element={<ProgramDetail />} />
+        <Route path="/allenamento" element={<Workout />} />
+        <Route path="/allenamento/:sessionId" element={<WorkoutSession />} />
+        <Route path="/sessioni" element={<Sessions />} />
+        <Route path="/sessioni/:id" element={<SessionDetail />} />
+        <Route path="/profilo" element={<Profile />} />
+      </Route>
 
-        {/* griglia responsive */}
-       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-          {dummyExercises.map((ex) => (
-            <div className="col" key={ex.id}>
-              <ExerciseCard
-                title={ex.title}
-                muscleGroup={ex.muscle}
-                equipment={ex.equip}
-                difficulty={ex.diff}
-                onStart={() => alert(`Avvio analisi per: ${ex.title}`)}
-              />
-            </div>
-          ))}
-        </div>
-      </main>
-    </div>
+      <Route path="/logout" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
+
 export default App;
