@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ErrorAlert from '../components/ErrorAlert/ErrorAlert';
 import ThemeToggle from '../components/ThemeToggle/ThemeToggle';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
 
 const Register = () => {
   const { register } = useAuth();
@@ -86,15 +87,7 @@ const Register = () => {
 
             <div className="mb-4">
               <label className="form-label small text-muted">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="form-control border-ff"
-                value={form.password}
-                onChange={handleChange}
-                minLength={6}
-                required
-              />
+              <PasswordInput name="password" value={form.password} onChange={handleChange} minLength={6} required />
             </div>
 
             <button type="submit" className="btn btn-info w-100 fw-semibold" disabled={loading}>

@@ -16,6 +16,9 @@ import WorkoutSession from './pages/WorkoutSession';
 import Sessions from './pages/Sessions';
 import SessionDetail from './pages/SessionDetail';
 import Profile from './pages/Profile';
+import Users from './pages/Users';
+import TrainerClients from './pages/TrainerClients';
+import TrainerClientDetail from './pages/TrainerClientDetail';
 import NotFound from './pages/NotFound';
 
 const AppLayout = () => (
@@ -47,6 +50,9 @@ function App() {
         <Route path="/sessioni" element={<Sessions />} />
         <Route path="/sessioni/:id" element={<SessionDetail />} />
         <Route path="/profilo" element={<Profile />} />
+        <Route path="/iscritti" element={<Users />} />
+        <Route path="/clienti" element={<TrainerClients />} />
+        <Route path="/clienti/:clientId" element={<TrainerClientDetail />} />
       </Route>
 
       <Route path="/logout" element={<Navigate to="/login" replace />} />

@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { authApi } from '../api/auth';
 import ErrorAlert from '../components/ErrorAlert/ErrorAlert';
 import ThemeToggle from '../components/ThemeToggle/ThemeToggle';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
@@ -48,9 +49,7 @@ const ResetPassword = () => {
             </div>
             <div className="mb-4">
               <label className="form-label small text-muted">Nuova password</label>
-              <input
-                type="password"
-                className="form-control border-ff"
+              <PasswordInput
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 minLength={6}
