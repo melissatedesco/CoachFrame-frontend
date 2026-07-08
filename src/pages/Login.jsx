@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ErrorAlert from '../components/ErrorAlert/ErrorAlert';
 import ThemeToggle from '../components/ThemeToggle/ThemeToggle';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
 
 const Login = () => {
   const { login } = useAuth();
@@ -55,14 +56,7 @@ const Login = () => {
             </div>
             <div className="mb-3">
               <label className="form-label small text-muted">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="form-control border-ff"
-                value={form.password}
-                onChange={handleChange}
-                required
-              />
+              <PasswordInput name="password" value={form.password} onChange={handleChange} required />
             </div>
 
             <div className="d-flex justify-content-end mb-3">

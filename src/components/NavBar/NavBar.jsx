@@ -6,7 +6,7 @@ import logo from '../../assets/logo-cut.png';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -58,6 +58,16 @@ const NavBar = () => {
               <li className="nav-item">
                 <NavLink className={linkClass} to="/profilo" onClick={closeMenu}>Profilo</NavLink>
               </li>
+              {user?.role === 'admin' && (
+                <li className="nav-item">
+                  <NavLink className={linkClass} to="/iscritti" onClick={closeMenu}>Iscritti</NavLink>
+                </li>
+              )}
+              {user?.role === 'trainer' && (
+                <li className="nav-item">
+                  <NavLink className={linkClass} to="/clienti" onClick={closeMenu}>Clienti</NavLink>
+                </li>
+              )}
               <li className="nav-item ms-lg-3">
                 <ThemeToggle />
               </li>
